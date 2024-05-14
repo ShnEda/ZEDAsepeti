@@ -10,7 +10,7 @@
             "request": "launch",
             "name": "CMake: Script debugging",
             "cmakeDebugType": "script",
-            "scriptPath": "${workspaceFolder}/ZEDASEPETI.cmake"
+            "scriptPath": "${workspaceFolder}"
         },
         {
             "type": "lldb",
