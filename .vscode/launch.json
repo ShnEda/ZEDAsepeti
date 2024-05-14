@@ -6,13 +6,6 @@
     "configurations": [
         
         {
-            "type": "cmake",
-            "request": "launch",
-            "name": "CMake: Script debugging",
-            "cmakeDebugType": "script",
-            "scriptPath": "${workspaceFolder}"
-        },
-        {
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
