@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1715546313 source:c:\users\zeyne\desktop\proje\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1715551752 source:c:\users\zeyne\desktop\proje\musteri.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<stdbool.h>
+	<time.h>
+	"musteri.h"
+
+1715548590 c:\users\zeyne\desktop\proje\musteri.h
+	<stdbool.h>
+
+1715630920 source:c:\users\eda\desktop\proje\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1715630920 source:c:\users\eda\desktop\proje\musteri.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<stdbool.h>
+	<time.h>
+	"musteri.h"
+
+1715630920 c:\users\eda\desktop\proje\musteri.h
+	<stdbool.h>
+
