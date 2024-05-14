@@ -1,0 +1,12 @@
+Kiymali Pide		200		30		Mevcut
+Peynirli Pide		180		20		Mevcut
+Kusbasili Pide		240		40		Mevcut Degil
+Lahmacun		80		20		Mevcut Degil
+Kofte Burger		160		20		Mevcut
+Tavuk Burger		110		20		Mevcut Degil
+Iskender Kebap		300		50		Mevcut
+Adana Kebap		270		40		Mevcut
+Urfa Kebap		260		40		Mevcut Degil
+Mercimek Corba		70		10		Mevcut
+Ezogelin Corba		70		10		Mevcut
+Mantar Corba		100		20		Mevcut Degil
