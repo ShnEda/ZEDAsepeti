@@ -8,7 +8,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/proje/musteri.c",
+            "program": "${workspaceFolder}/proje/proje",
             "args": [],
             "cwd": "${workspaceFolder}"
         }
