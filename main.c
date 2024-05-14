@@ -14,6 +14,7 @@ int menu() {
     return secim;
 }
 
+//Musteri icin kullanici adi ve sifre yapmamiz gerek.
 int main() {
 
     int secim = menu();
