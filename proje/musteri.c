@@ -24,7 +24,7 @@ void yemekleriListele()
 
     fclose(yemeklistesitxt);
 }
-
+//SIPARIS 1'DEN baslayarak devam edicek, kontrol mekanizması: onceki sayi var m yk mu ona gore devams
 void siparisAl()
 {
     FILE* siparislertxt = fopen("siparisler.txt", "a");
