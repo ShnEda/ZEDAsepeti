@@ -180,7 +180,7 @@ void yemekSil(struct Yemek yemekler[], int* yemek_sayisi, int silinecek_ID)
 {
     for (int i = 0; i < *yemek_sayisi; i++) {
         if (yemekler[i].ID == silinecek_ID) {
-            // Silinecek yemeði listenin sonundaki yemeðin bilgileriyle deðiþtir
+            // Silinecek yemeÃ°i listenin sonundaki yemeÃ°in bilgileriyle deÃ°iÃ¾tir
             yemekler[i] = yemekler[(*yemek_sayisi) - 1];
             (*yemek_sayisi)--;
             printf("\n\nYemek bilgileri silindi!\n");
