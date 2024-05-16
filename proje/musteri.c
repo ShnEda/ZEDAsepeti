@@ -6,6 +6,7 @@
 #include <time.h>
 #include "musteri.h"
 
+
 void yemekleriListele()
 {
     FILE* yemeklistesitxt = fopen("yemeklistesi.txt", "r");
@@ -25,6 +26,7 @@ void yemekleriListele()
     }
     fclose(yemeklistesitxt);
 }
+
 
 
 void siparisAl()
@@ -90,6 +92,34 @@ void siparisAl()
     fclose(siparislertxt);
 }
 
+void kullaniciKaydet(struct Kullanici kullanici)
+{
+    FILE* kullanicilarTxt = fopen("kullanicilar.txt", "w");
+    if (kullanicilarTxt == NULL) {
+        printf("Kullanicilar bulunamadi.");
+        return;
+    }
+    fprintf(kullanicilarTxt, "%s %s", kullanici.kulAdi, kullanici.sifre);
+    fclose(kullanicilarTxt);
+}
+
+void kullaniciGiris()
+{
+
+}
+
+void yeniKullanici(struct Kullanici *klnclar)
+{
+    int topKullanici = dosyaSatirSayi("kullanicilar.txt");
+    printf("Kullanici Adi: ");
+    scanf("%s", klnclar[topKullanici].kulAdi);
+    printf("Sifreniz: ");
+    scanf("%s", klnclar[topKullanici].sifre);
+
+    kullaniciKaydet(klnclar[topKullanici]);
+    (topKullanici)++;
+}
+
 
 void yeniSiparis()
 {
@@ -110,3 +140,15 @@ void oncekiSiparis()
 
 }
 
+int dosyaSatirSayi(const char *dosyaTXT)
+{
+    int satirSira=0;
+    FILE *dosyamiz = fopen(dosyaTXT, "r");
+    while (!feof(dosyamiz))
+    {
+        if (fgetc(dosyamiz) == '\n')
+            satirSira++;
+    }
+    fclose(dosyamiz);
+    return satirSira;
+}
