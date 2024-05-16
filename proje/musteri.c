@@ -14,17 +14,19 @@ void yemekleriListele()
         return;
     }
 
-    printf("\tYemek Adi\t\t\tFiyati\t\tHazirlama Suresi (dk)\n");
-    printf("\t---------\t\t\t------\t\t---------------------\n");
-    while (fscanf(yemeklistesitxt," %[^\t] %f %d %[^\n]", yemek.yemekAdi, &yemek.fiyat, &yemek.hazirlama_suresi, yemek.durum) == 4) {
-        if (strcmp(yemek.durum, "Mevcut") == 0) { //yemek.durum ile "Mevcut" yazisini karsilasitiriyor. ayni ise 0 donduruyor.
-            printf("\t%s\t\t\t%.2f TL\t\t%d dk\n", yemek.yemekAdi, yemek.fiyat, yemek.hazirlama_suresi);
+    struct Yemek yemek;
+
+    printf("ID\tYemek Adi\tFiyati\t\tHazirlama Suresi (dk)\n");
+    printf("--\t---------\t------\t\t---------------------\n");
+    while (fscanf(yemeklistesitxt, "%d %[^\t] %f %d %[^\n]", &yemek.ID, yemek.yemekAdi, &yemek.fiyat, &yemek.hazirlama_suresi, yemek.durum) == 5) {
+        if (strcmp(yemek.durum, "Mevcut") == 0) {
+            printf("%d\t%s\t%.2f TL\t\t%d dk\n", yemek.ID, yemek.yemekAdi, yemek.fiyat, yemek.hazirlama_suresi);
         }
     }
-
     fclose(yemeklistesitxt);
 }
-//SIPARIS 1'DEN baslayarak devam edicek, kontrol mekanizması: onceki sayi var m yk mu ona gore devams
+
+
 void siparisAl()
 {
     FILE* siparislertxt = fopen("siparisler.txt", "a");
@@ -33,11 +35,12 @@ void siparisAl()
         return;
     }
 
+    struct Siparis siparis;
     static int siparisID = 1; //siparis ID'si ayarlaniyor
     siparis.id = siparisID++;
 
-    printf("\n\nYemek adini giriniz: ");
-    scanf(" %[^\n]s", siparis.yemekAdi);
+    printf("\n\nYemek ID'sini giriniz: ");
+    scanf("%d", &siparis.yemekID);
 
 
     FILE* yemeklistesitxt = fopen("yemeklistesi.txt", "r");
@@ -48,14 +51,15 @@ void siparisAl()
     }
 
     kontrol.yemekBuldu = 0;
-    while (fgets(kontrol.satir, sizeof(kontrol.satir), yemeklistesitxt)) {
-        sscanf(kontrol.satir, " %[^\t] %f %d", kontrol.yemekAdi, &kontrol.fiyat, &kontrol.hazirlanmaSuresi);
-        if (strncmp(siparis.yemekAdi, kontrol.yemekAdi, sizeof(siparis.yemekAdi)) == 0) {
+    while (fscanf(yemeklistesitxt, "%d %[^\t] %f %d %[^\n]", &kontrol.yemekID, kontrol.yemekAdi, &kontrol.fiyat, &kontrol.hazirlama_suresi, kontrol.durum) != EOF) {
+        if (kontrol.yemekID == siparis.yemekID) {
             static int siparisID = 1; //siparis ID'si ayarlaniyor
             siparis.id = siparisID++;
-            kontrol.yemekBuldu = 1;
+            siparis.yemekID = kontrol.yemekID;
+            strcpy(siparis.yemekAdi, kontrol.yemekAdi);
             siparis.fiyat = kontrol.fiyat;
-            siparis.hazirlanmaSuresi = kontrol.hazirlanmaSuresi;
+            siparis.hazirlama_suresi = kontrol.hazirlama_suresi;
+            kontrol.yemekBuldu = 1;
             break;
         }
     }
@@ -63,15 +67,16 @@ void siparisAl()
 
 
     if (!kontrol.yemekBuldu) {
-        printf("\nHATA: %s yemegi yemeklistesi.txt dosyasinda bulunamadi!\n", siparis.yemekAdi);
+        printf("\nHATA: Yemek ID'si %d olan yemek yemeklistesi.txt dosyasinda bulunamadi!\n", siparis.yemekID);
         fclose(siparislertxt);
         return siparisAl();
     }
 
+
     siparis.siparisTarihi = time(NULL); //siparis tarihi
 
     //siparisin ne zaman hazir olacagi
-    time_t hazirOlmaZamani = siparis.siparisTarihi + (siparis.hazirlanmaSuresi * 60); // dakika cinsinden sureyi saniyeye cevir
+    time_t hazirOlmaZamani = siparis.siparisTarihi + (siparis.hazirlama_suresi * 60); // dakika cinsinden sureyi saniyeye cevir
     struct tm *hazirOlmaZamaniYapisi = localtime(&hazirOlmaZamani);
     char hazirOlmaZamaniStr[100];
     strftime(hazirOlmaZamaniStr, sizeof(hazirOlmaZamaniStr), "%c", hazirOlmaZamaniYapisi);
@@ -79,40 +84,12 @@ void siparisAl()
     siparisZamaniStr[strlen(siparisZamaniStr) - 1] = '\0';
 
 
-    fprintf(siparislertxt, "\nSP_%d\t\t\t%s\t\t\t%.2f TL\t\t\t%s\t\t\t%s", siparis.id, siparis.yemekAdi, siparis.fiyat, siparisZamaniStr, hazirOlmaZamaniStr);
+    fprintf(siparislertxt, "\nSP_%d\t\t%s\t\t%.2f TL    \t%s\t\t%s", siparis.id, siparis.yemekAdi, siparis.fiyat, siparisZamaniStr, hazirOlmaZamaniStr);
     printf("Siparis basariyla alindi ve kaydedildi!\n");
 
     fclose(siparislertxt);
 }
 
-void kullaniciKaydet(struct Kullanici kullanici)
-{
-    FILE* kullanicilarTxt = fopen("kullanicilar.txt", "w");
-    if (kullanicilarTxt == NULL) {
-        printf("Kullanicilar bulunamadi.");
-        return;
-    }
-    fprintf(kullanicilarTxt, "%s %s", kullanici.kulAdi, kullanici.sifre);
-    fclose(kullanicilarTxt);
-}
-
-void kullaniciGiris()
-{
-
-}
-
-void yeniKullanici(struct Kullanici *kullanicilar)
-{
-    int *topKullanici = dosyaSatirSayi(kullanicilar.txt); //kullanicilar txt yerine structta
-    //bahsedilen kisim kullanilacak.
-    printf("Kullanici Adi: ");
-    scanf("%s", kullanicilar[*topKullanici].kulAdi);
-    printf("Sifreniz: ");
-    scanf("%s", kullanicilar[*topKullanici].sifre);
-
-    kullaniciKaydet(kullanicilar[*topKullanici]);
-    (*topKullanici)++;
-}
 
 void yeniSiparis()
 {
@@ -132,3 +109,4 @@ void oncekiSiparis()
 {
 
 }
+
