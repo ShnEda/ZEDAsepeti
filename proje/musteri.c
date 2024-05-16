@@ -104,7 +104,7 @@ void kullaniciGiris()
 void yeniKullanici(struct Kullanici *kullanicilar)
 {
     int *topKullanici = dosyaSatirSayi(kullanicilar.txt); //kullanicilar txt yerine structta
-    //bahsedilen kisim kullanilacak
+    //bahsedilen kisim kullanilacak.
     printf("Kullanici Adi: ");
     scanf("%s", kullanicilar[*topKullanici].kulAdi);
     printf("Sifreniz: ");
