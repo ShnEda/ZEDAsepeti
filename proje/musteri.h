@@ -1,66 +1,43 @@
 #ifndef _MUSTERI_H
 #define _MUSTERI_H
-#define maxSifre 6
-#define maxKulAdi 100
-#define tpmKulSayi "kullanicilar.txt"
 #include <stdbool.h>
 
 struct Yemek {
-    char yemekAdi[100];
+    int ID;
+    char yemekAdi[30];
     float fiyat;
     int hazirlama_suresi;
-    bool durum[100];
-}yemek;
+    bool durum[30];
+};
 
 struct Siparis {
     int id;
-    char yemekAdi[100];
+    int yemekID;
+    char yemekAdi[30];
     float fiyat;
+    int hazirlama_suresi;
     time_t siparisTarihi;
-    int hazirlanmaSuresi;
-}siparis;
+};
 
 struct Kontrol {
+    int yemekID;
     char satir[100];
-    char yemekAdi[100];
+    char yemekAdi[30];
     float fiyat;
-    int hazirlanmaSuresi;
+    int hazirlama_suresi;
+    char durum[30];
     int yemekBuldu;
 }kontrol;
 
-struct Kullanici {
-    char kulAdi[maxKulAdi];
-    char sifre[maxSifre];
-    //toplam kullanici sayisi yazilacak
-};
-
-
-int dosyaSatirSayi(const char *dosyaTXT)
-{
-    int satirSira=0;
-    FILE *dosyamiz = fopen(dosyaTXT, "r");
-    while (!feof(dosyamiz))
-    {
-        if (fgetc(dosyamiz) == '\n')
-            satirSira++;
-    }
-    fclose(dosyamiz);
-    return satirSira;
-}
 
 
 void yemekleriListele();
 void siparisAl();
 
 
-void kullaniciKaydet();
-void kullaniciGiris();
-void yeniKullanici();
 void yeniSiparis();
 void mevcutSiparis();
 void oncekiSiparis();
 int menu();
 
-
 #endif
-
