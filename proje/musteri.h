@@ -2,6 +2,7 @@
 #define _MUSTERI_H
 #define maxSifre 6
 #define maxKulAdi 100
+#define tpmKulSayi "kullanicilar.txt"
 #include <stdbool.h>
 
 struct Yemek {
@@ -30,6 +31,7 @@ struct Kontrol {
 struct Kullanici {
     char kulAdi[maxKulAdi];
     char sifre[maxSifre];
+    //toplam kullanici sayisi yazilacak
 };
 
 
@@ -53,6 +55,7 @@ void siparisAl();
 
 void kullaniciKaydet();
 void kullaniciGiris();
+void yeniKullanici();
 void yeniSiparis();
 void mevcutSiparis();
 void oncekiSiparis();
