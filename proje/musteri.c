@@ -11,7 +11,7 @@ void yemekleriListele()
     FILE* yemeklistesitxt = fopen("yemeklistesi.txt", "r");
     if (yemeklistesitxt == NULL) {
         printf("Yemek listesi bulunamadi!\n");
-        return 0;
+        return;
     }
 
     printf("\tYemek Adi\t\t\tFiyati\t\tHazirlama Suresi (dk)\n");
@@ -30,7 +30,7 @@ void siparisAl()
     FILE* siparislertxt = fopen("siparisler.txt", "a");
     if (siparislertxt == NULL) {
         printf("Siparis dosyasi acilamadi!\n");
-        return 0;
+        return;
     }
 
     static int siparisID = 1; //siparis ID'si ayarlaniyor
@@ -44,7 +44,7 @@ void siparisAl()
     if (yemeklistesitxt == NULL) {
         printf("Yemek listesi dosyasi acilamadi!\n");
         fclose(siparislertxt);
-        return 0;
+        return;
     }
 
     kontrol.yemekBuldu = 0;
@@ -84,6 +84,19 @@ void siparisAl()
 
     fclose(siparislertxt);
 }
+
+void kullaniciKaydet(struct Kullanici kullanici)
+{
+    FILE* kullanicilarTxt = fopen("kullanicilar.txt", "w");
+    if (kullanicilarTxt == NULL) {
+        printf("Kullanicilar bulunamadi.");
+        return;
+    }
+    fprintf(kullanicilarTxt, "%s %s", kullanici.kulAdi, kullanici.sifre);
+    fclose(kullanicilarTxt);
+}
+
+void kullaniciGiris();
 
 void yeniSiparis()
 {
