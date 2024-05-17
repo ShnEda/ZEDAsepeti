@@ -33,6 +33,9 @@ struct Kontrol {
 
 struct Kullanici {
     int kulBuldu;
+    int id;
+    int klncID;
+    char klncAdi[30];
     char kulAdi[maxKulAdi];
     char sifre[maxSifre];
     //toplam kullanici sayisi yazilacak

@@ -14,8 +14,9 @@ int menu() {
     return secim;
 }
 
-int main() {
-
+int main()
+{
+    // Buraya kullanici giris ekrani gelecek; oturum ac, giris yap gibi. + cikis yapmak istediginde yes no olabilir.
     int secim = menu();
     while(secim!=0) {
         switch(secim) {

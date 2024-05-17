@@ -112,15 +112,20 @@ void kullaniciGiris()
         return;
     }
 
+    struct Kullanici klnc;
+    static int klncID = 1; //siparis ID'si ayarlaniyor
+    klnc.id = klncID++;
+
+    printf("\n\nKullanici ID'sini giriniz: ");
+    scanf("%d", &klnc.klncID);
+
     kullanici.kulBuldu = 0;//Duzenlemek gerekiyor, header'da bazi eklemeler yapilmali
-    while (fscanf(klnclarTXT, "%d %[^\t] %f %d %[^\n]", &kullanici.yemekID, kullanici.yemekAdi, &kullanici.fiyat, &kullanici.hazirlama_suresi, kullanici.durum) != EOF) {
-        if (kullanici.yemekID == kullanici.yemekID) {
+    while (fscanf(klnclarTXT, "%d %[^\t]", &kullanici.klncID, kullanici.klncAdi) != EOF) {
+        if (kullanici.klncID == klnc.klncID) {
             static int siparisID = 1; //kul ID'si ayarlaniyor
-            siparis.id = siparisID++;
-            siparis.yemekID = kullanici.yemekID;
-            strcpy(siparis.yemekAdi, kullanici.yemekAdi);
-            siparis.fiyat = kullanici.fiyat;
-            siparis.hazirlama_suresi = kullanici.hazirlama_suresi;
+            klnc.id = siparisID++;
+            klnc.klncID = kullanici.klncID;
+            strcpy(klnc.klncAdi, kullanici.klncAdi);
             kullanici.kulBuldu = 1;
             break;
         }
@@ -132,8 +137,6 @@ void kullaniciGiris()
         fclose(klnclarTXT);
         return kullaniciGiris();
     }
-
-
 }
 
 void yeniKullanici(struct Kullanici *klnclar)
