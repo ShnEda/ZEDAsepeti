@@ -19,15 +19,14 @@ void yemekleriListele()
 
     struct Yemek yemek;
 
-    printf("ID\tYemek Adi\tFiyati\t\tHazirlama Suresi (dk)\n");
-    printf("--\t---------\t------\t\t---------------------\n");
+    printf("ID\tYemek Adi\tFiyati\t\tHazirlama Suresi (dk)\tDurum\n");
+    printf("--\t---------\t------\t\t---------------------\t-----\n");
     while (fscanf(yemeklistesitxt, "%d %[^\t] %f %d %[^\n]", &yemek.ID, yemek.yemekAdi, &yemek.fiyat, &yemek.hazirlama_suresi, yemek.durum) == 5) {
-        if (strcmp(yemek.durum, "Mevcut") == 0) {
-            printf("%d\t%s\t%.2f TL\t\t%d dk\n", yemek.ID, yemek.yemekAdi, yemek.fiyat, yemek.hazirlama_suresi);
-        }
+            printf("%d\t%s\t%.2f TL\t\t%d dk\t\t%s\n", yemek.ID, yemek.yemekAdi, yemek.fiyat, yemek.hazirlama_suresi,yemek.durum);
     }
     fclose(yemeklistesitxt);
 }
+
 
 void yemekEkle(struct Yemek yemekler[], int *yemek_sayisi)
 {
