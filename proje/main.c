@@ -6,7 +6,7 @@ int menu() {
     printf("\n\t     **RESTORAN EKRANI**\n\n");
     printf("\t 1 - YEMEK EKLEME \n");
     printf("\t 2 - YEMEK GUNCELLEME \n");
-    printf("\t 3 - YEMEK SILME \n");
+    printf("\t 3 - YEMEK SILME \n");//
     printf("\t 4 - YENI SIPARIS ONAY/RED \n");
     printf("\t 5 - GUNLUK RAPOR GORUNTULEME \n");
     printf("\t 6 - ANALIZLER \n");
