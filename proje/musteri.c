@@ -105,6 +105,34 @@ void kullaniciKaydet(struct Kullanici kullanici)
 
 void kullaniciGiris()
 {
+    FILE* klnclarTXT = fopen("kullanicilar.txt", "r");
+    if (klnclarTXT == NULL) {
+        printf("Kullanici dosyasi acilamadi!\n");
+        fclose(klnclarTXT);
+        return;
+    }
+
+    kullanici.kulBuldu = 0;//Duzenlemek gerekiyor, header'da bazi eklemeler yapilmali
+    while (fscanf(klnclarTXT, "%d %[^\t] %f %d %[^\n]", &kullanici.yemekID, kullanici.yemekAdi, &kullanici.fiyat, &kullanici.hazirlama_suresi, kullanici.durum) != EOF) {
+        if (kullanici.yemekID == kullanici.yemekID) {
+            static int siparisID = 1; //kul ID'si ayarlaniyor
+            siparis.id = siparisID++;
+            siparis.yemekID = kullanici.yemekID;
+            strcpy(siparis.yemekAdi, kullanici.yemekAdi);
+            siparis.fiyat = kullanici.fiyat;
+            siparis.hazirlama_suresi = kullanici.hazirlama_suresi;
+            kullanici.kulBuldu = 1;
+            break;
+        }
+    }
+
+    fclose(klnclarTXT);
+    if (!kullanici.kulBuldu) {
+        printf("\nHATA: Kullanici ID'si bulunamadi!\n");
+        fclose(klnclarTXT);
+        return kullaniciGiris();
+    }
+
 
 }
 
@@ -112,7 +140,7 @@ void yeniKullanici(struct Kullanici *klnclar)
 {
     int topKullanici = dosyaSatirSayi("kullanicilar.txt");
     printf("Kullanici Adi: ");
-    scanf("%s", klnclar[topKullanici].kulAdi);
+    scanf("%s", klnclar[topKullanici].kulAdi);//buradaki scanfler fscanf degildir diye dusunuyorum??
     printf("Sifreniz: ");
     scanf("%s", klnclar[topKullanici].sifre);
 

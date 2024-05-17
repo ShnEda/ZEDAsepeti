@@ -32,10 +32,11 @@ struct Kontrol {
 }kontrol;
 
 struct Kullanici {
+    int kulBuldu;
     char kulAdi[maxKulAdi];
     char sifre[maxSifre];
     //toplam kullanici sayisi yazilacak
-};
+}kullanici;
 
 
 int dosyaSatirSayi(const char *dosyaTXT);
