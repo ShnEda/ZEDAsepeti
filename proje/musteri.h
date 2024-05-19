@@ -21,6 +21,13 @@ struct Siparis {
     time_t siparisTarihi;
 };
 
+//typedef struct Musteri {
+//    int ID, fiyat, hazirlama_suresi,yemekID, yemekBuldu;
+//    char yemekAdi[MAX_UZUNLUK], durum[MAX_UZUNLUK], tarih[MAX_UZUNLUK],
+//         saat[MAX_UZUNLUK], satir[100], kullaniciAdi[MAX_UZUNLUK], sifre[MAX_UZUNLUK];
+//    time_t siparisTarihi, hazirOlmaZamani;
+//} musteri ;
+
 struct Kontrol {
     int yemekID;
     char satir[100];
@@ -41,6 +48,17 @@ struct Kullanici {
     //toplam kullanici sayisi yazilacak
 }kullanici;
 
+//int MusteriUygulamasi();
+//int musteriEkrani();
+//void kayitOl();
+//int oturumAc();
+//void yemekleriListele();
+//void siparisAl();
+//void yeniSiparis();
+//int mevcutSiparis();
+//void oncekiSiparis();
+
+
 
 int dosyaSatirSayi(const char *dosyaTXT);
 
@@ -55,6 +73,6 @@ void yeniKullanici();
 void yeniSiparis();
 void mevcutSiparis();
 void oncekiSiparis();
-int menu();
+
 
 #endif
