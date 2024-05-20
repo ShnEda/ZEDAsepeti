@@ -1,46 +1,31 @@
-#ifndef _RESTORAN_H
-#define _RESTORAN_H
-#include <stdbool.h>
+#ifndef _MUSTERI_H
+#define _MUSTERI_H
 
 #define MAX_UZUNLUK 30
 
-struct Yemek {
-    int ID;
-    char yemekAdi[MAX_UZUNLUK];
-    int fiyat;
-    int hazirlama_suresi;
-    char durum[MAX_UZUNLUK];
-};
+typedef struct Musteri {
+    int ID, fiyat, hazirlama_suresi,yemekID, yemekBuldu;
+    char yemekAdi[MAX_UZUNLUK], durum[MAX_UZUNLUK], tarih[MAX_UZUNLUK],
+         saat[MAX_UZUNLUK], satir[100], kullaniciAdi[MAX_UZUNLUK], sifre[MAX_UZUNLUK];
+    time_t siparisTarihi, hazirOlmaZamani;
+} musteri ;
 
-struct Siparis {
-    char ID[MAX_UZUNLUK];
-    char yemekAdi[MAX_UZUNLUK];
-    int fiyat;
-    char sipZamani[MAX_UZUNLUK];
-    char hazirZamani[MAX_UZUNLUK];
 
-};
+int MusteriUygulamasi();
+int musteriEkrani();
+
+
+void kayitOl();
+int oturumAc();
+
 
 void yemekleriListele();
+void siparisAl();
+void yeniSiparis();
 
-void yemekEkle(struct Yemek yemekler[], int *yemek_sayisi);
-void yemeklistesiKaydet(struct Yemek yemekler[], int yemek_sayisi);
-int yemekEkleme();
+int mevcutSiparis();
 
-void yemekGuncelle(struct Yemek yemekler[], int yemek_sayisi, int guncellenecek_ID);
-int yemekGuncelleme();
-
-void yemekSil(struct Yemek yemekler[], int* yemek_sayisi, int silinecek_ID);
-int yemekSilme();
-
-int siparisSayisi(FILE* siparislertxt);
-int onay_red();
-
-void gunlukRapor();
-void analizler();
-void asciSayisiBelirleme();
-
-int menu();
+void oncekiSiparis();
 
 #endif
 
