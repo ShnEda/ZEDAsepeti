@@ -8,7 +8,6 @@
 
 #define MAX_UZUNLUK 30
 
-
 void yemekleriListele()
 {
     FILE* yemeklistesitxt = fopen("yemeklistesi.txt", "r");
@@ -19,14 +18,13 @@ void yemekleriListele()
 
     struct Yemek yemek;
 
-    printf("ID\tYemek Adi\tFiyati\t\tHazirlama Suresi (dk)\tDurum\n");
-    printf("--\t---------\t------\t\t---------------------\t-----\n");
-    while (fscanf(yemeklistesitxt, "%d %[^\t] %f %d %[^\n]", &yemek.ID, yemek.yemekAdi, &yemek.fiyat, &yemek.hazirlama_suresi, yemek.durum) == 5) {
-            printf("%d\t%s\t%.2f TL\t\t%d dk\t\t%s\n", yemek.ID, yemek.yemekAdi, yemek.fiyat, yemek.hazirlama_suresi,yemek.durum);
+    printf("ID \tYemek Adi\t\tFiyati\t\tHazirlama Suresi (dk)\t\tDurum\n");
+    printf("---\t---------\t\t------\t\t---------------------\t\t-----\n");
+    while (fscanf(yemeklistesitxt, "%d %[^\t] %d %d %[^\n]", &yemek.ID, yemek.yemekAdi, &yemek.fiyat, &yemek.hazirlama_suresi, yemek.durum) == 5) {
+            printf("%d\t%s\t\t%d TL\t\t\t%d dk\t\t\t%s\n", yemek.ID, yemek.yemekAdi, yemek.fiyat, yemek.hazirlama_suresi,yemek.durum);
     }
     fclose(yemeklistesitxt);
 }
-
 
 void yemekEkle(struct Yemek yemekler[], int *yemek_sayisi)
 {
@@ -39,17 +37,14 @@ void yemekEkle(struct Yemek yemekler[], int *yemek_sayisi)
 
     srand(time(NULL));
 
-    yeni_yemek.ID = rand() % 100 + 1;
+    yeni_yemek.ID = rand() % 500 + 100;  //yemeklerin ID leri ayarlaniyor
 
-    printf("\n\nYemek adi: ");
+    printf("\n\nYemek adi                  : ");
     scanf(" %[^\n]s", yeni_yemek.yemekAdi);
-
-    printf("Fiyat (TL): ");
-    scanf("%f", &yeni_yemek.fiyat);
-
-    printf("Hazirlanma suresi (dk): ");
+    printf("Fiyat (TL)                 : ");
+    scanf("%d", &yeni_yemek.fiyat);
+    printf("Hazirlanma suresi (dk)     : ");
     scanf("%d", &yeni_yemek.hazirlama_suresi);
-
     printf("Durum (Mevcut/Mevcut Degil): ");
     scanf(" %[^\n]s", yeni_yemek.durum);
 
@@ -65,17 +60,15 @@ void yemeklistesiKaydet(struct Yemek yemekler[], int yemek_sayisi)
         printf("Dosya acilirken hata olustu!\n");
         return;
     }
-
-
     for (int i = 0; i < yemek_sayisi; i++) {
-        fprintf(yemeklistesitxt, "%d\t%s\t%.2f\t\t%d\t%s\n", yemekler[i].ID, yemekler[i].yemekAdi, yemekler[i].fiyat,
+        fprintf(yemeklistesitxt, "%d\t%s\t%d\t\t%d\t%s\n", yemekler[i].ID, yemekler[i].yemekAdi, yemekler[i].fiyat,
                 yemekler[i].hazirlama_suresi, yemekler[i].durum);
     }
 
     fclose(yemeklistesitxt);
 }
 
-void yemekEkleme()
+int yemekEkleme()
 {
     struct Yemek yemekler[MAX_UZUNLUK];
     int yemek_sayisi = 0;
@@ -87,14 +80,13 @@ void yemekEkleme()
 
     do {
         yemekEkle(yemekler, &yemek_sayisi);
+        yemeklistesiKaydet(yemekler, yemek_sayisi);
 
         printf("\nBaska bir yemek eklemek istiyor musunuz? (E/H): ");
         scanf(" %c", &devam);
     } while (devam == 'E' || devam == 'e');
 
-    yemeklistesiKaydet(yemekler, yemek_sayisi);
-
-    printf("\n\nYemek listesi %s dosyasina kaydedildi.\n", "yemeklistesi.txt");
+    printf("\n\nYemek ekleme basarili..\n");
     printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
     getch();
     system("cls");
@@ -110,7 +102,7 @@ void yemekGuncelle(struct Yemek yemekler[], int yemek_sayisi, int guncellenecek_
             scanf(" %[^\n]s", yemekler[i].yemekAdi);
 
             printf("Yeni fiyat (TL): ");
-            scanf("%f", &yemekler[i].fiyat);
+            scanf("%d", &yemekler[i].fiyat);
 
             printf("Yeni hazirlanma suresi (dk): ");
             scanf("%d", &yemekler[i].hazirlama_suresi);
@@ -140,7 +132,7 @@ int yemekGuncelleme()
     printf("Mevcut Yemek Listesi..\n\n");
     yemekleriListele();
 
-    while (fscanf(yemeklistesitxt, "%d %[^\t] %f %d %[^\n]", &yemekler[yemek_sayisi].ID, yemekler[yemek_sayisi].yemekAdi,
+    while (fscanf(yemeklistesitxt, "%d %[^\t] %d %d %[^\n]", &yemekler[yemek_sayisi].ID, yemekler[yemek_sayisi].yemekAdi,
                   &yemekler[yemek_sayisi].fiyat, &yemekler[yemek_sayisi].hazirlama_suresi, yemekler[yemek_sayisi].durum) != EOF) {
         yemek_sayisi++;
     }
@@ -161,7 +153,7 @@ int yemekGuncelleme()
     }
 
     for (int i = 0; i < yemek_sayisi; i++) {
-        fprintf(yemeklistesitxt, "%d\t%s\t%.2f\t%d\t\t%s\n", yemekler[i].ID, yemekler[i].yemekAdi, yemekler[i].fiyat,
+        fprintf(yemeklistesitxt, "%d\t%s\t%d\t%d\t\t%s\n", yemekler[i].ID, yemekler[i].yemekAdi, yemekler[i].fiyat,
                 yemekler[i].hazirlama_suresi, yemekler[i].durum);
     }
 
@@ -204,7 +196,7 @@ int yemekSilme()
     printf("Mevcut Yemek Listesi..\n\n");
     yemekleriListele();
 
-    while (fscanf(yemeklistesitxt, "%d %[^\t] %f %d %[^\n]", &yemekler[yemek_sayisi].ID, yemekler[yemek_sayisi].yemekAdi,
+    while (fscanf(yemeklistesitxt, "%d %[^\t] %d %d %[^\n]", &yemekler[yemek_sayisi].ID, yemekler[yemek_sayisi].yemekAdi,
                   &yemekler[yemek_sayisi].fiyat, &yemekler[yemek_sayisi].hazirlama_suresi, yemekler[yemek_sayisi].durum) != EOF) {
         yemek_sayisi++;
     }
@@ -225,7 +217,7 @@ int yemekSilme()
     }
 
     for (int i = 0; i < yemek_sayisi; i++) {
-        fprintf(yemeklistesitxt, "%d\t%s\t%.2f\t%d\t\t%s\n", yemekler[i].ID, yemekler[i].yemekAdi, yemekler[i].fiyat,
+        fprintf(yemeklistesitxt, "%d\t%s\t%d\t%d\t\t%s\n", yemekler[i].ID, yemekler[i].yemekAdi, yemekler[i].fiyat,
                 yemekler[i].hazirlama_suresi, yemekler[i].durum);
     }
 
@@ -238,7 +230,7 @@ int yemekSilme()
     return 0;
 }
 
-void onay_red()
+int onay_red()
 {
 
 }
@@ -257,6 +249,3 @@ void asciSayisiBelirleme()
 {
 
 }
-
-
-
