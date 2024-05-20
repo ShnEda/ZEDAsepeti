@@ -1,78 +1,46 @@
-#ifndef _MUSTERI_H
-#define _MUSTERI_H
-#define maxSifre 6
-#define maxKulAdi 100
+#ifndef _RESTORAN_H
+#define _RESTORAN_H
 #include <stdbool.h>
+
+#define MAX_UZUNLUK 30
 
 struct Yemek {
     int ID;
-    char yemekAdi[30];
-    float fiyat;
+    char yemekAdi[MAX_UZUNLUK];
+    int fiyat;
     int hazirlama_suresi;
-    bool durum[30];
+    char durum[MAX_UZUNLUK];
 };
 
 struct Siparis {
-    int id;
-    int yemekID;
-    char yemekAdi[30];
-    float fiyat;
-    int hazirlama_suresi;
-    time_t siparisTarihi;
+    char ID[MAX_UZUNLUK];
+    char yemekAdi[MAX_UZUNLUK];
+    int fiyat;
+    char sipZamani[MAX_UZUNLUK];
+    char hazirZamani[MAX_UZUNLUK];
+
 };
 
-//typedef struct Musteri {
-//    int ID, fiyat, hazirlama_suresi,yemekID, yemekBuldu;
-//    char yemekAdi[MAX_UZUNLUK], durum[MAX_UZUNLUK], tarih[MAX_UZUNLUK],
-//         saat[MAX_UZUNLUK], satir[100], kullaniciAdi[MAX_UZUNLUK], sifre[MAX_UZUNLUK];
-//    time_t siparisTarihi, hazirOlmaZamani;
-//} musteri ;
-
-struct Kontrol {
-    int yemekID;
-    char satir[100];
-    char yemekAdi[30];
-    float fiyat;
-    int hazirlama_suresi;
-    char durum[30];
-    int yemekBuldu;
-}kontrol;
-
-struct Kullanici {
-    int kulBuldu;
-    int id;
-    int klncID;
-    char klncAdi[30];
-    char kulAdi[maxKulAdi];
-    char sifre[maxSifre];
-    //toplam kullanici sayisi yazilacak
-}kullanici;
-
-//int MusteriUygulamasi();
-//int musteriEkrani();
-//void kayitOl();
-//int oturumAc();
-//void yemekleriListele();
-//void siparisAl();
-//void yeniSiparis();
-//int mevcutSiparis();
-//void oncekiSiparis();
-
-
-
-int dosyaSatirSayi(const char *dosyaTXT);
-
-
 void yemekleriListele();
-void siparisAl();
 
-void kullaniciKaydet();
-void kullaniciGiris();
-void yeniKullanici();
+void yemekEkle(struct Yemek yemekler[], int *yemek_sayisi);
+void yemeklistesiKaydet(struct Yemek yemekler[], int yemek_sayisi);
+int yemekEkleme();
 
-void yeniSiparis();
-void mevcutSiparis();
-void oncekiSiparis();
+void yemekGuncelle(struct Yemek yemekler[], int yemek_sayisi, int guncellenecek_ID);
+int yemekGuncelleme();
 
+void yemekSil(struct Yemek yemekler[], int* yemek_sayisi, int silinecek_ID);
+int yemekSilme();
+
+int siparisSayisi(FILE* siparislertxt);
+int onay_red();
+
+void gunlukRapor();
+void analizler();
+void asciSayisiBelirleme();
+
+int menu();
 
 #endif
+
