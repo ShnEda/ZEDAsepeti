@@ -143,7 +143,7 @@ void siparisAl()
     }
     fclose(yemeklistesitxt);
 
-    if (kontrol.yemekBulduv == 0) {
+    if (kontrol.yemekBuldu == 0) {
         printf("\n%d ID'li yemek yemeklistesi.txt dosyasinda bulunamadi!\n", siparis.yemekID);
         fclose(siparislertxt);
         return siparisAl();
@@ -191,7 +191,7 @@ void kullaniciGiris()
     }
 
     struct Kullanici klnc;
-    static int klncID = 1; //siparis ID'si ayarlaniyor
+    static int klncID = 1; //klnc ID'si ayarlaniyor
     klnc.id = klncID++;
 
     printf("\n\nKullanici ID'sini giriniz: ");
@@ -269,5 +269,5 @@ int dosyaSatirSayi(const char *dosyaTXT)
             satirSira++;
     }
     fclose(dosyamiz);
-    return satirSira;
+    return satirSira;
 }
