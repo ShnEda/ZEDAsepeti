@@ -80,11 +80,13 @@ int yemekEkleme()
 
     do {
         yemekEkle(yemekler, &yemek_sayisi);
-        yemeklistesiKaydet(yemekler, yemek_sayisi);
+
 
         printf("\nBaska bir yemek eklemek istiyor musunuz? (E/H): ");
         scanf(" %c", &devam);
     } while (devam == 'E' || devam == 'e');
+
+    yemeklistesiKaydet(yemekler, yemek_sayisi);
 
     printf("\n\nYemek ekleme basarili..\n");
     printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
@@ -232,7 +234,48 @@ int yemekSilme()
 
 int onay_red()
 {
+    FILE* siparislertxt = fopen("siparisler.txt", "r");
+    if (siparislertxt == NULL) {
+        printf("Dosya açılırken hata oluştu!\n");
+        return 1;
+    }
 
+    struct Siparis siparis;
+
+    while (fscanf(siparislertxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", siparis.ID, siparis.yemekAdi, &siparis.fiyat, siparis.sipZamani,
+                  siparis.hazirZamani, siparis.kullaniciAdi) == 6) {
+
+        printf("%s\t%s\t%d TL\t%s\t%s\t%s\n", siparis.ID, siparis.yemekAdi, siparis.fiyat, siparis.sipZamani,
+                  siparis.hazirZamani, siparis.kullaniciAdi);
+        printf("\nBu siparisi onayliyorsaniz (O/o) tuslayiniz, ");
+        printf("reddediyorsaniz (R/r) tuslayiniz: ");
+        char cevap;
+        scanf(" %c", &cevap);
+
+        if (cevap == 'o' || cevap == 'O') {
+            FILE* aktiftxt = fopen("aktif.txt","a");
+            fprintf(aktiftxt, "%s\t%s\t%d\t%s\t%s\t%s\n",siparis.ID, siparis.yemekAdi, siparis.fiyat, siparis.sipZamani,
+                  siparis.hazirZamani, siparis.kullaniciAdi);
+            fclose(aktiftxt);
+            printf("Islem onaylandi!\n");
+        }
+        else if (cevap == 'r' || cevap == 'R') {
+            printf("Islem reddedildi!\n");
+        }
+        else {
+            printf("Gecersiz cevap! O/o veya R/r girin.\n");
+        }
+    }
+
+    fclose(siparislertxt);
+    FILE* siparislertxt0 = fopen("siparisler.txt", "w");
+    fclose(siparislertxt0);
+    printf("\n\nIslem tamamlandi!\n");
+    printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
+    getch();
+    system("cls");
+
+    return 0;
 }
 
 void gunlukRapor()
