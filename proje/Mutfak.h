@@ -12,6 +12,12 @@
  * !!!Asci sadece 1 yemek yapabilir, en az aşçı sayisiyla
  * (mumkunse mutfakta toplam asci sayisina gore yazilmali)
  *
+ * //Asci yemegi en az bitirme suresi kalan ya da hazirlanma zamani en erken olana gore
+ * //bu sart olmasi icin tum ascilar dolu olmali
+ * //ilk ascilar 1. ascidan son asciya sirasiyla yemekler atanacak.
+ * //eger esitse asci numarasi kucuk olan atanir.
+ * //ascilar aktif.txt kullanacak
+ *
  * Bura da gpt yolu:
  *- Onaylı Yemekleri Listeleme:(gerek var mi)
  *- Baska bir uygulama veya sistemden alinan onayli yemek listesini oku
@@ -22,6 +28,8 @@ Bunu belirli bir yemegin hazirlik suresini artirmak icin kullan.
 * -Ascinin Yemegi Hazirlama ve Guncelleme:
 * -Asci bir yemegi hazirlamaya basladiginda, secilen yemegin hazirlik durumunu guncelle.
 Guncellenmis yemek listesini yeni bir dosyaya kaydet veya mevcut dosyayi guncelle.
+
+
 
 */
 
