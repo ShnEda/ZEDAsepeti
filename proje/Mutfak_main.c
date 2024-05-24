@@ -22,6 +22,7 @@ void otomatikYemekGuncelle(){
 void atanmisYemekListele(){
     //ascilara atanmis yemekleri listelenmis halde terminalde gosterecek
 
+
 }
 
 
