@@ -18,7 +18,7 @@ struct Siparis {
     int fiyat;
     char sipZamani[MAX_UZUNLUK];
     char hazirZamani[MAX_UZUNLUK];
-
+    char kullaniciAdi[MAX_UZUNLUK];
 };
 
 void yemekleriListele();
@@ -39,8 +39,6 @@ int onay_red();
 void gunlukRapor();
 void analizler();
 void asciSayisiBelirleme();
-
-int menu();
 
 #endif
 
