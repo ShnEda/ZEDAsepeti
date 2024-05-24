@@ -1,6 +1,5 @@
 #ifndef _RESTORAN_H
 #define _RESTORAN_H
-#include <stdbool.h>
 
 #define MAX_UZUNLUK 30
 
@@ -40,8 +39,14 @@ int yemekSilme();
 int siparisSayisi(FILE* siparislertxt);
 int onay_red();
 
-void gunlukRapor();
+int gunlukRapor();
+
 void analizler();
+void gunlukKazanc();
+void aylikKazanc();
+void donemKazanc();
+void enCokTuketim();
+
 void asciSayisiBelirleme();
 
 #endif
