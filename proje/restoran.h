@@ -36,7 +36,7 @@ int yemekSilme();
 int siparisSayisi(FILE* siparislertxt);
 int onay_red();
 
-void gunlukRapor();
+int gunlukRapor();
 void analizler();
 void asciSayisiBelirleme();
 
