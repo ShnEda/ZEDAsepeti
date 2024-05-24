@@ -6,6 +6,12 @@
 #include <time.h>
 #include "Mutfak.h"
 
+int enKucukBulma();
+
+void otomatikYemekGuncelle();
+void atanmisYemekListele();
+
+
 /*
  *
  * void onaylı yemekleri Listele

@@ -7,8 +7,9 @@ typedef struct Mutfak {
 
 int enKucukBulma();
 
-void atanmisYemekListele();
 void otomatikYemekGuncelle();
+void atanmisYemekListele();
+
 
 /* typedef struct mutfak
  *
