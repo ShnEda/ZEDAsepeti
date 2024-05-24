@@ -21,6 +21,10 @@ struct Siparis {
     char kullaniciAdi[MAX_UZUNLUK];
 };
 
+struct Asci {
+    char isim[MAX_UZUNLUK];
+};
+
 void yemekleriListele();
 
 void yemekEkle(struct Yemek yemekler[], int *yemek_sayisi);

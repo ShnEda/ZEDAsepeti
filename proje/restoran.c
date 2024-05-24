@@ -318,9 +318,13 @@ void analizler()
             //en cok kazanci olan gunu bul
 }
 
-void asciSayisiBelirleme()
+void asciSayisiBelirleme(int asciSayisi)
 {
-    //
-
-
+    //istedigimiz sayida asci kullanabilmek icin parametreyle devam edilebilen kod
+    struct Asci topAsci[MAX_UZUNLUK];
+    int sira = 1;
+    for(sira;sira<asciSayisi;sira++)
+    {
+        snprintf(topAsci[sira].isim, sizeof(topAsci[sira].isim), "A%d", sira);
+    }
 }
