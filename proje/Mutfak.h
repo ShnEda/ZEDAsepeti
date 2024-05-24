@@ -1,6 +1,15 @@
 #ifndef _MUTFAK_H
 #define _MUTFAK_H
 
+typedef struct Mutfak {
+
+};
+
+int enKucukBulma();
+
+void atanmisYemekListele();
+void otomatikYemekGuncelle();
+
 /* typedef struct mutfak
  *
  * void onaylı yemekleri Listele
@@ -28,8 +37,6 @@ Bunu belirli bir yemegin hazirlik suresini artirmak icin kullan.
 * -Ascinin Yemegi Hazirlama ve Guncelleme:
 * -Asci bir yemegi hazirlamaya basladiginda, secilen yemegin hazirlik durumunu guncelle.
 Guncellenmis yemek listesini yeni bir dosyaya kaydet veya mevcut dosyayi guncelle.
-
-
 
 */
 
