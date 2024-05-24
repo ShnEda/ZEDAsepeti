@@ -295,6 +295,7 @@ void analizler()
 
 void asciSayisiBelirleme()
 {
+    //
 
 
 }
