@@ -280,12 +280,17 @@ int onay_red()
 
 void gunlukRapor()
 {
-
+    //velev ki adam 23.59 da siparis verdi. siparis verilen gun kabul edilecek.
+    //aktif.txt yi okuyarak girilen tarihe gore yapacak..
 }
 
 void analizler()
 {
-
+    //Gunluk Kazanc:
+        //aktif.txt yi ac
+        //kullanicidan ay/gun/yil al
+        //sonra fiyatlari cekip toplayip degiskene ekliyecek
+//SORU: 
 }
 
 void asciSayisiBelirleme()
