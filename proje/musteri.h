@@ -25,4 +25,6 @@ void mevcutSiparis();
 
 void oncekiSiparis();
 
+int dosyaSatirSayi(const char *dosyaTXT);
+
 #endif
