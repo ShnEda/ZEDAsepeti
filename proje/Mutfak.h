@@ -1,5 +1,5 @@
-#ifndef ZEDASEPETI_MUTFAK_H
-#define ZEDASEPETI_MUTFAK_H
+#ifndef _MUTFAK_H
+#define _MUTFAK_H
 
 /* typedef struct mutfak
  *
