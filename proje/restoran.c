@@ -289,7 +289,7 @@ int gunlukRapor()
     FILE* aktiftxt = fopen("aktif.txt", "r");
     if (aktiftxt == NULL) {
         printf("aktif.txt mevcut degil!!\n");
-        return 1;
+        return;
     }
     printf("\n\n");
     struct Siparis siparis;
@@ -305,14 +305,92 @@ int gunlukRapor()
     printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
     getch();
     system("cls");
+}
+
+void gunlukKazanc()
+{
+    char istenenTarih[20];
+    int toplam=0;
+    printf("Gunluk Kazanc ekrani..\n\n");
+    printf("Istenen tarihi giriniz [lutfen (aa/gg/yyyy) formatinda olsun]: ");
+    scanf(" %[^\n]", istenenTarih);
+
+    FILE* aktiftxt = fopen("aktif.txt", "r");
+    if (aktiftxt == NULL) {
+        printf("aktif.txt mevcut degil!!\n");
+        return;
+    }
+    printf("\n\n");
+    struct Siparis siparis;
+    while (fscanf(aktiftxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", siparis.ID, siparis.yemekAdi, &siparis.fiyat, siparis.sipZamani, siparis.hazirZamani, siparis.kullaniciAdi) == 6) {
+        if (strstr(siparis.sipZamani, istenenTarih) != NULL) {
+            toplam += siparis.fiyat;
+        }
+    }
+
+    printf("%s tarihli gunun kazanci %d TL'dir\n", istenenTarih, toplam);
+    fclose(aktiftxt);
+    printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
+    getch();
+    system("cls");
+}
+
+void aylikKazanc()
+{
+    printf("BU KISIM HALA MUAMMA!!\n");
+}
+
+void donemKazanc()
+{
+    
+}
+
+void enCokTuketim()
+{
+
+}
+
+int analizler()
+{
+    int secim3;
+    printf("Analiz ekrani..\n\n");
+    printf("\t 1 - GUNLUK KAZANC \n");
+    printf("\t 2 - AYLIK KAZANC \n");
+    printf("\t 3 - DONEM KAZANCI \n");
+    printf("\t 4 - EN COK TUKETIM \n");
+    printf("\t 0 - RESTORAN EKRANINA DON \n");
+    printf("\n\t Seciminiz     : ");
+    scanf("%d",&secim3);
+    system("cls");
+
+    while(secim3!=0) {
+        switch(secim3) {
+
+            case 1: gunlukKazanc(); break;
+            case 2: aylikKazanc(); break;
+            case 3: donemKazanc(); break;
+            case 4: enCokTuketim(); break;
+            case 0: return menu(); break;
+            default: printf("hatali secim yaptiniz ! \n"); break;
+        }
+        secim3 = analizler();
+    }
 
     return 0;
 }
 
-
-void analizler()
+void asciSayisiBelirleme(int asciSayisi)
 {
-    //Gunluk Kazanc:
+    //istedigimiz sayida asci kullanabilmek icin parametreyle devam edilebilen kod
+    struct Asci topAsci[MAX_UZUNLUK];
+    int sira = 1;
+    for(sira;sira<asciSayisi;sira++)
+    {
+        snprintf(topAsci[sira].isim, sizeof(topAsci[sira].isim), "A%d", sira);
+    }
+}
+
+//Gunluk Kazanc:
         //aktif.txt yi ac
         //kullanicidan ay/gun/yil al
         //sonra fiyatlari cekip toplayip degiskene ekliyecek
@@ -342,15 +420,3 @@ void analizler()
             //tarihleri cek
             //tarihleri karsilastir
             //en cok kazanci olan gunu bul
-}
-
-void asciSayisiBelirleme(int asciSayisi)
-{
-    //istedigimiz sayida asci kullanabilmek icin parametreyle devam edilebilen kod
-    struct Asci topAsci[MAX_UZUNLUK];
-    int sira = 1;
-    for(sira;sira<asciSayisi;sira++)
-    {
-        snprintf(topAsci[sira].isim, sizeof(topAsci[sira].isim), "A%d", sira);
-    }
-}
