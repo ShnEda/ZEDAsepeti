@@ -37,7 +37,13 @@ int siparisSayisi(FILE* siparislertxt);
 int onay_red();
 
 int gunlukRapor();
+
 void analizler();
+void gunlukKazanc();
+void aylikKazanc();
+void donemKazanc();
+void enCokTuketim();
+
 void asciSayisiBelirleme();
 
 #endif
