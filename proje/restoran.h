@@ -39,9 +39,9 @@ int yemekSilme();
 int siparisSayisi(FILE* siparislertxt);
 int onay_red();
 
-int gunlukRapor();
+void gunlukRapor();
 
-void analizler();
+int analizler();
 void gunlukKazanc();
 void aylikKazanc();
 void donemKazanc();
