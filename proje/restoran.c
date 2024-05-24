@@ -278,11 +278,37 @@ int onay_red()
     return 0;
 }
 
-void gunlukRapor()
+int gunlukRapor()
 {
-    //velev ki adam 23.59 da siparis verdi. siparis verilen gun kabul edilecek.
-    //aktif.txt yi okuyarak girilen tarihe gore yapacak..
+    char istenenTarih[20];
+    int sayac = 0;
+    printf("Gunluk Rapor ekrani..\n\n");
+    printf("Istenen tarihi giriniz [lutfen (aa/gg/yyyy) formatinda olsun]: ");
+    scanf(" %[^\n]", istenenTarih);
+
+    FILE* aktiftxt = fopen("aktif.txt", "r");
+    if (aktiftxt == NULL) {
+        printf("aktif.txt mevcut degil!!\n");
+        return 1;
+    }
+    printf("\n\n");
+    struct Siparis siparis;
+    while (fscanf(aktiftxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", siparis.ID, siparis.yemekAdi, &siparis.fiyat, siparis.sipZamani, siparis.hazirZamani, siparis.kullaniciAdi) == 6) {
+        if (strstr(siparis.sipZamani, istenenTarih) != NULL) {
+            printf("%s\t%s\t%d TL\t%s\t%s\t%s\n", siparis.ID, siparis.yemekAdi, siparis.fiyat, siparis.sipZamani, siparis.hazirZamani, siparis.kullaniciAdi);
+            sayac++;
+        }
+    }
+
+    printf("\n%s tarihli gune ait %d adet siparis kayit vardir.\n", istenenTarih, sayac);
+    fclose(aktiftxt);
+    printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
+    getch();
+    system("cls");
+
+    return 0;
 }
+
 
 void analizler()
 {
