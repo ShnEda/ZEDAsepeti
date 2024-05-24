@@ -290,7 +290,23 @@ void analizler()
         //aktif.txt yi ac
         //kullanicidan ay/gun/yil al
         //sonra fiyatlari cekip toplayip degiskene ekliyecek
-//SORU: 
+    //En cok satilan yemek:
+        //yemeklistesi.txt yi ac
+        //yemeklerin adlarini ve fiyatlarini cek
+        //siparisler.txt yi ac
+        //yemeklerin adlarini cek
+        //yemeklerin adlarini karsilastir
+        //en cok satilan yemegi bul
+     //En cok siparis veren kullanici:
+        //siparisler.txt yi ac
+        //kullanicilarin adlarini cek
+        //kullanicilarin adlarini karsilastir
+        //en cok siparis veren kullanicinin adini bul
+     //En cok kazanci olan gun:
+        //aktif.txt yi ac
+        //tarihleri cek
+        //tarihleri karsilastir
+        //en cok kazanci olan gunu bul
 }
 
 void asciSayisiBelirleme()
