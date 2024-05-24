@@ -6,10 +6,23 @@
 #include <time.h>
 #include "Mutfak.h"
 
-int enKucukBulma();
+int enKucukBulma() {//bu donguyu yapabilmek icin ya normal kucuk
+    //ya da listedeki veya diziye yonelik kucuk bulma fonksiyonu yapilacak
+    //int enKucuk = 0,;
+    //return enKucuk;
+}
 
-void otomatikYemekGuncelle();
-void atanmisYemekListele();
+void otomatikYemekGuncelle(){
+    //onaylanan yemekleri aktif.txt dosyasindan aldigi
+    //gibi ascilara atayacak
+    //ascilarin alacagi yemekler A1'den An'e kadar atandiktan sonra
+    //siradaki yemekler en erken bitirene atanacak
+    //eger bitis suresi esitse asci numarasi kucuk olan atanacak
+}
+void atanmisYemekListele(){
+    //ascilara atanmis yemekleri listelenmis halde terminalde gosterecek
+
+}
 
 
 /*
