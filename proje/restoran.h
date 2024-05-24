@@ -1,6 +1,5 @@
 #ifndef _RESTORAN_H
 #define _RESTORAN_H
-#include <stdbool.h>
 
 #define MAX_UZUNLUK 30
 
