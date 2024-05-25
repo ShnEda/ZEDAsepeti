@@ -21,7 +21,7 @@ struct Siparis {
 };
 
 struct Asci {
-    char isim[MAX_UZUNLUK];
+    char asciAdi[MAX_UZUNLUK];
 };
 
 void yemekleriListele();
@@ -50,4 +50,3 @@ void enCokTuketim();
 void asciSayisiBelirleme();
 
 #endif
-
