@@ -8,7 +8,8 @@
 
 int enKucukBulma() {
     int enKucuk = 0,i;
-    for(i=0;)
+    int sayi;
+
 
     return enKucuk;
 }
