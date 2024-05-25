@@ -45,6 +45,7 @@ void otomatikYemekGuncelle(){
 }
 void atanmisYemekListele(){
     //ascilara atanmis yemekleri listelenmis halde terminalde gosterecek
+    //bu kismi duzenlemek gerek
     FILE* aktifSiptxt = fopen("aktif.txt", "r");
     if (aktifSiptxt == NULL) {
         printf("aktif.txt mevcut degil!!\n");
