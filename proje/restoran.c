@@ -414,27 +414,156 @@ void donemKazanc()
     system("cls");
 }
 
+void enCokTuketilenYemek()
+{
+    FILE* aktiftxt = fopen("aktif.txt", "r");
+    if (aktiftxt == NULL) {
+        printf("aktif.txt mevcut degil!!\n");
+        return;
+    }
+
+    char yemekler[100][100];
+    int yemekSayilari[100] = {0};
+    int yemekAdeti = 0;
+
+    struct Siparis siparis;
+    while (fscanf(aktiftxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", siparis.ID, siparis.yemekAdi, &siparis.fiyat, siparis.sipZamani, siparis.hazirZamani, siparis.kullaniciAdi) == 6) {
+        int i, yemekBuldu = 0;
+        for (i = 0; i < 100; i++) { //yemegi ilk gordugunde kaydediyor
+            if (yemekler[i][0] == '\0') {
+                strcpy(yemekler[i], siparis.yemekAdi);
+                yemekSayilari[i]++;
+                yemekAdeti++;
+                yemekBuldu = 1;
+                break;
+            }
+            if (strcmp(siparis.yemekAdi, yemekler[i]) == 0) { //her gordugunde artiyiriyor
+                yemekSayilari[i]++;
+                yemekBuldu = 1;
+                break;
+            }
+        }
+        if (yemekBuldu == 0) { // Yemekler dizisi dolduysa donguden cik
+            printf("yemekler dizisi doldu!!\n");
+            break;
+        }
+    }
+
+    int enCokSatilan = 0;
+    for (int i = 1; i < 100; i++) {
+        if (yemekSayilari[i] > yemekSayilari[enCokSatilan]) {
+            enCokSatilan = i;
+        }
+    }
+    printf("En Cok Tuketilen Yemek\t\t\tAdeti\n");
+    printf("----------------------\t\t\t-----\n");
+    printf("%s\t\t\t\t%d\n\n",yemekler[enCokSatilan],yemekAdeti);
+    fclose(aktiftxt);
+}
+
+void enKazancliGun()
+{
+    FILE* aktiftxt = fopen("aktif.txt", "r");
+    if (aktiftxt == NULL) {
+        printf("aktif.txt mevcut degil!!\n");
+        return;
+    }
+
+    struct Siparis siparisler[100],siparis;
+    int siparisSayisi = 0;
+
+    while (fscanf(aktiftxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", siparis.ID, siparis.yemekAdi, &siparis.fiyat, siparis.sipZamani, siparis.hazirZamani, siparis.kullaniciAdi) == 6) {
+
+        struct Siparis yeni_siparis;
+        strcpy(yeni_siparis.tarih, siparis.sipZamani);
+        yeni_siparis.fiyat = siparis.fiyat;
+
+        siparisler[siparisSayisi] = yeni_siparis;
+        siparisSayisi++;
+    }
+
+    int toplamFiyatlar[100] = {0};
+    for (int i = 0; i < siparisSayisi; i++) { //her gunun toplam fiyatini hesaplar
+        for (int j = i; j < siparisSayisi; j++) {
+            if (strcmp(siparisler[i].tarih, siparisler[j].tarih) == 0)
+                toplamFiyatlar[i] += siparisler[j].fiyat;
+        }
+    }
+
+    int enYuksekFiyat = 0;
+    int index = 0;
+    for (int i = 0; i < siparisSayisi; i++) {
+        if (toplamFiyatlar[i] > enYuksekFiyat) {
+            enYuksekFiyat = toplamFiyatlar[i];
+            index = i;
+        }
+    }
+
+    printf("En Kazancli Gun\t\t\t\tKazanc\n");
+    printf("---------------\t\t\t\t------\n");
+    printf("%s\t\t\t\t%d TL\n\n",siparisler[index].tarih, enYuksekFiyat);
+    fclose(aktiftxt);
+}
+
+void enCokSiparisVerenKullanici()
+{
+    FILE* aktiftxt = fopen("aktif.txt", "r");
+    if (aktiftxt == NULL) {
+        printf("aktif.txt mevcut degil!!\n");
+        return;
+    }
+
+    char kullanicilar[100][100];
+    int kullaniciSayisi[100] = {0};
+    int sipAdeti = 0;
+
+    struct Siparis siparis;
+    while (fscanf(aktiftxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", siparis.ID, siparis.yemekAdi, &siparis.fiyat, siparis.sipZamani, siparis.hazirZamani, siparis.kullaniciAdi) == 6) {
+        int i, kullaniciBuldu = 0;
+        for (i = 0; i < 100; i++) { //kullaniciyi ilk gordugunde kaydediyor
+            if (kullanicilar[i][0] == '\0') {
+                strcpy(kullanicilar[i], siparis.kullaniciAdi);
+                kullaniciSayisi[i]++;
+                sipAdeti++;
+                kullaniciBuldu = 1;
+                break;
+            }
+            if (strcmp(siparis.kullaniciAdi, kullanicilar[i]) == 0) { //her gordugunde artiyiriyor
+                kullaniciSayisi[i]++;
+                kullaniciBuldu = 1;
+                break;
+            }
+        }
+        if (kullaniciBuldu == 0) { // kullanicilar dizisi dolduysa donguden cik
+            printf("kullanicilar dizisi doldu!!\n");
+            break;
+        }
+    }
+
+    int enCokKullanici = 0;
+    for (int i = 1; i < 100; i++) {
+        if (kullaniciSayisi[i] > kullaniciSayisi[enCokKullanici]) {
+            enCokKullanici = i;
+        }
+    }
+
+    printf("En Cok Siparis Veren Kullanici\t\tSiparis Miktari\n");
+    printf("------------------------------\t\t---------------\n");
+    printf("%s\t\t\t\t\t%d\n\n",kullanicilar[enCokKullanici],sipAdeti);
+    fclose(aktiftxt);
+
+}
+
 void enCokTuketim()
 {
-    //En cok Tuketim:
-        //En cok satilan yemek:
-            //yemeklistesi.txt yi ac
-            //yemeklerin adlarini ve fiyatlarini cek
-            //siparisler.txt yi ac
-            //yemeklerin adlarini cek
-            //yemeklerin adlarini karsilastir
-            //en cok satilan yemegi bul
-        //En cok siparis veren kullanici:
-            //siparisler.txt yi ac
-            //kullanicilarin adlarini cek
-            //kullanicilarin adlarini karsilastir
-            //en cok siparis veren kullanicinin adini bul
-        //En cok kazanci olan gun:
-            //aktif.txt yi ac
-            //tarihleri cek
-            //tarihleri karsilastir
-            //en cok kazanci olan gunu bul
+    printf("En Cok Tuketim ekrani..\n\n\n");
+    enCokTuketilenYemek();
+    enKazancliGun();
+    enCokSiparisVerenKullanici();
 
+    printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
+    getch();
+    system("cls");
 }
 
 int analizler()
@@ -469,10 +598,38 @@ int analizler()
 void asciSayisiBelirleme(int asciSayisi)
 {
     //istedigimiz sayida asci kullanabilmek icin parametreyle devam edilebilen kod
-    struct Asci topAsci[MAX_UZUNLUK];
+    struct Asci topAsci[MAX_UZUNLUK]; // senin struct da bu vardi edoş :D
     int sira = 1;
     for(sira;sira<asciSayisi;sira++)
     {
         snprintf(topAsci[sira].isim, sizeof(topAsci[sira].isim), "A%d", sira);
     }
 }
+
+//restoran.h daki asci struct inin icerigini unuttum ve kendiminki ile guncelledim 
+//ama zaten muhtemelen bu son yazdigim kodu kullaniriz
+//senin kodla modifiye ettim edoş :D
+
+//void asciSayisiBelirleme()
+//{
+//    int asciSayisi;
+//    printf("Asci sayisini giriniz: ");
+//    scanf("%d", &asciSayisi);
+//
+//    FILE* ascilartxt = fopen("ascilar.txt","w");
+//
+//    struct Asci ascilar[asciSayisi];
+//    int sira = 1;
+//    for(sira;sira<=asciSayisi;sira++)
+//    {
+//        snprintf(ascilar[sira].asciAdi,sizeof(ascilar[sira].asciAdi), "A%d", sira);
+//        fprintf(ascilartxt, "%s\n" ,ascilar[sira].asciAdi);
+//    }
+//
+//    fclose(ascilartxt);
+//    printf("\n%d adet asci basari ile kaydedildi.",asciSayisi);
+//    printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
+//    getch();
+//    system("cls");
+//}
+
