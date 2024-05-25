@@ -4,7 +4,7 @@
 #define MAX_UZUNLUK 30
 
 typedef struct Mutfak {
-    int ID, fiyat, hazirlama_suresi,yemekID, yemekBuldu;
+    int fiyat,yemekID, yemekBuldu;
     char yemekAdi[30], durum[15], tarih[30],
             saat[30], satir[100], kullaniciAdi[15],
             sifre[8], sipID[10],sipZamani[30],hazZamani[30];
