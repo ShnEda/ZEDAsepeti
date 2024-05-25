@@ -9,7 +9,7 @@ typedef struct Mutfak {
             saat[30], satir[100], kullaniciAdi[15],
             sifre[8], sipID[10],sipZamani[30],hazZamani[30];
     time_t siparisTarihi, hazirOlmaZamani;
-} mutfak ;
+} mutfak;
 
 int enKucukBulma();
 

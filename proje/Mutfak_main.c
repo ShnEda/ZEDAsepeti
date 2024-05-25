@@ -1,15 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <limits.h>
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
 #include "Mutfak.h"
 
-int enKucukBulma() {
-    int enKucuk = 0,i;
-    int sayi;
-
+int enKucukBulma(int* dizi, int diziBoyutu) {
+    int enKucuk = INT_MAX;
+    for(int i = 0; i < diziBoyutu; i++) {
+        if(dizi[i] < enKucuk) {
+            enKucuk = dizi[i];
+        }
+    }
 
     return enKucuk;
 }
@@ -20,6 +24,24 @@ void otomatikYemekGuncelle(){
     //ascilarin alacagi yemekler A1'den An'e kadar atandiktan sonra
     //siradaki yemekler en erken bitirene atanacak
     //eger bitis suresi esitse asci numarasi kucuk olan atanacak
+    //ascilar aktif.txt dosyasini kullanacak
+    //ascilarin yemek hazirlama suresi 0 olmasa da yeni yemegin saati ve ne zaman
+    //baslayacagi belli olacak
+    //sadece bu yemek hazirlandigi an mevcut siparislerden atilip onceki siparislere atilacak
+    //yemek hazirlanma sureleri
+    //hazir_zamani.tm_mon -= 1;
+    //        hazir_zamani.tm_year -= 1900;
+    //
+    //        time_t hazir_zamani_t = mktime(&hazir_zamani);
+    //if (hazir_zamani_t > simdiki_zaman) {
+    //            int kalanSure = (hazir_zamani_t - simdiki_zaman) / 60; kullanilarak
+    //kalan sure hesaplanacak
+    //kalanSure'den gidilerek enKucukBulma() fonksiyonu kullanildiktan sonra
+    //restoran.c'deki void asciSayisiBelirleme(int asciSayisi) ile alinan asciSayisi
+    //n'da bulunan ascilarin 0(yemek yapmiyor) ve 1(yemek yapiyor) durumlarina gore
+    //ascilar arasindaki kalan sure de enKucukBulma fonksiyonunun kullanilabilmesi icin
+    //kalan sureler bir diziye atanacak
+
 }
 void atanmisYemekListele(){
     //ascilara atanmis yemekleri listelenmis halde terminalde gosterecek
@@ -52,7 +74,8 @@ void atanmisYemekListele(){
             printf("%s\t%s\t\t%d TL\t\t%d dk\t\t%s\n",mutfak.sipID, mutfak.yemekAdi, mutfak.fiyat, kalanSure, mutfak.kullaniciAdi);
         }
 
-        //kalan sureden gidilerek ascilar arasinda paylasim yapilacak
+        //kalan sureden gidilerek ascilar arasinda paylasim yapilmis hali de eklenecek
+        //gosterirken
     }
 
     fclose(aktifSiptxt);
