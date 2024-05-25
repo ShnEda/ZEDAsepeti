@@ -337,16 +337,103 @@ void gunlukKazanc()
 
 void aylikKazanc()
 {
-    printf("BU KISIM HALA MUAMMA!!\n");
+    char istenenAy[20];
+    int toplam=0;
+    printf("Aylik Kazanc ekrani..\n\n");
+    printf("Istenen ayi giriniz [lutfen (aa/) formatinda olsun]: ");
+    scanf(" %[^\n]", istenenAy);
+
+    FILE* aktiftxt = fopen("aktif.txt", "r");
+    if (aktiftxt == NULL) {
+        printf("aktif.txt mevcut degil!!\n");
+        return;
+    }
+    printf("\n\n");
+    struct Siparis siparis;
+    while (fscanf(aktiftxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", siparis.ID, siparis.yemekAdi, &siparis.fiyat, siparis.sipZamani, siparis.hazirZamani, siparis.kullaniciAdi) == 6) {
+        if (strstr(siparis.sipZamani, istenenAy) != NULL) {
+            toplam += siparis.fiyat;
+        }
+    }
+
+    printf("%s tarihli ayin kazanci %d TL'dir\n", istenenAy, toplam);
+    fclose(aktiftxt);
+    printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
+    getch();
+    system("cls");
 }
 
 void donemKazanc()
 {
-    
+    char basTarih[20], sonTarih[20];
+    struct tm basZamani = {0};
+    struct tm sonZamani = {0};
+    int toplam = 0;
+
+    printf("Donem Kazanci ekrani..\n");
+    printf("\nBaslangic tarihi giriniz [lutfen (aa/gg/yyyy) formatinda olsun]: ");
+    scanf("%s", basTarih);
+    printf("\nBitis tarihi giriniz [lutfen (aa/gg/yyyy) formatinda olsun]: ");
+    scanf("%s", sonTarih);
+
+    sscanf(basTarih, "%d/%d/%d", &basZamani.tm_mday, &basZamani.tm_mon, &basZamani.tm_year);
+    basZamani.tm_mon -= 1;
+    basZamani.tm_year -= 1900;
+
+    sscanf(sonTarih, "%d/%d/%d", &sonZamani.tm_mday, &sonZamani.tm_mon, &sonZamani.tm_year);
+    sonZamani.tm_mon -= 1;
+    sonZamani.tm_year -= 1900;
+
+    time_t basTarihsan = mktime(&basZamani); // Baslangic tarihinin saniyesi
+    time_t sonTarihsan = mktime(&sonZamani) + 86399; // Bitis tarihinin saniyesi (1 gün ekledik)
+
+    FILE* aktiftxt = fopen("aktif.txt", "r");
+    if (aktiftxt == NULL) {
+        printf("aktif.txt mevcut degil!!\n");
+        return;
+    }
+
+    struct Siparis siparis;
+    while (fscanf(aktiftxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", siparis.ID, siparis.yemekAdi, &siparis.fiyat, siparis.sipZamani, siparis.hazirZamani, siparis.kullaniciAdi) == 6) {
+        struct tm sipZamani = {0};
+        sscanf(siparis.sipZamani, "%d/%d/%d %d:%d:%d", &sipZamani.tm_mday, &sipZamani.tm_mon, &sipZamani.tm_year, &sipZamani.tm_hour, &sipZamani.tm_min, &sipZamani.tm_sec);
+        sipZamani.tm_mon -= 1;
+        sipZamani.tm_year -= 1900;
+
+        time_t sipTarihsan = mktime(&sipZamani); // Sipariş tarihinin saniyesi
+
+        if (difftime(sipTarihsan, basTarihsan) >= 0 && difftime(sipTarihsan, sonTarihsan) <= 0) {
+            toplam += siparis.fiyat;
+        }
+    }
+
+    fclose(aktiftxt);
+    printf("\n%s - %s tarihleri arasindaki kazanc %d TL'dir\n", basTarih, sonTarih, toplam);
+    printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
+    getch();
+    system("cls");
 }
 
 void enCokTuketim()
 {
+    //En cok Tuketim:
+        //En cok satilan yemek:
+            //yemeklistesi.txt yi ac
+            //yemeklerin adlarini ve fiyatlarini cek
+            //siparisler.txt yi ac
+            //yemeklerin adlarini cek
+            //yemeklerin adlarini karsilastir
+            //en cok satilan yemegi bul
+        //En cok siparis veren kullanici:
+            //siparisler.txt yi ac
+            //kullanicilarin adlarini cek
+            //kullanicilarin adlarini karsilastir
+            //en cok siparis veren kullanicinin adini bul
+        //En cok kazanci olan gun:
+            //aktif.txt yi ac
+            //tarihleri cek
+            //tarihleri karsilastir
+            //en cok kazanci olan gunu bul
 
 }
 
@@ -389,34 +476,3 @@ void asciSayisiBelirleme(int asciSayisi)
         snprintf(topAsci[sira].isim, sizeof(topAsci[sira].isim), "A%d", sira);
     }
 }
-
-//Gunluk Kazanc:
-        //aktif.txt yi ac
-        //kullanicidan ay/gun/yil al
-        //sonra fiyatlari cekip toplayip degiskene ekliyecek
-    //Aylik Kazanc:
-        //aktif.txt yi ac
-        //kullanicidan ay/yil al
-        //sonra fiyatlari cekip toplayip degiskene ekliyecek
-    //Donemlik Kazanc:
-        //aktif.txt yi ac
-        //kullanicidan baslangic ve bitis tarihlerini al
-        //sonra fiyatlari cekip toplayip degiskene ekliyecek
-    //En cok Tuketim:
-        //En cok satilan yemek:
-            //yemeklistesi.txt yi ac
-            //yemeklerin adlarini ve fiyatlarini cek
-            //siparisler.txt yi ac
-            //yemeklerin adlarini cek
-            //yemeklerin adlarini karsilastir
-            //en cok satilan yemegi bul
-        //En cok siparis veren kullanici:
-            //siparisler.txt yi ac
-            //kullanicilarin adlarini cek
-            //kullanicilarin adlarini karsilastir
-            //en cok siparis veren kullanicinin adini bul
-        //En cok kazanci olan gun:
-            //aktif.txt yi ac
-            //tarihleri cek
-            //tarihleri karsilastir
-            //en cok kazanci olan gunu bul
