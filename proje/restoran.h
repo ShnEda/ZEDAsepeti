@@ -45,7 +45,11 @@ int analizler();
 void gunlukKazanc();
 void aylikKazanc();
 void donemKazanc();
+
 void enCokTuketim();
+void enCokTuketilenYemek();
+void enKazancliGun();
+void enCokSiparisVerenKullanici();
 
 void asciSayisiBelirleme();
 
