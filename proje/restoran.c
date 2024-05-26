@@ -595,41 +595,27 @@ int analizler()
     return 0;
 }
 
-void asciSayisiBelirleme(int asciSayisi)
+
+void asciSayisiBelirleme()
 {
-    //istedigimiz sayida asci kullanabilmek icin parametreyle devam edilebilen kod
-    struct Asci topAsci[MAX_UZUNLUK]; // senin struct da bu vardi edoş :D
+    int asciSayisi;
+    printf("Asci sayisini giriniz: ");
+    scanf("%d", &asciSayisi);
+
+    FILE* ascilartxt = fopen("ascilar.txt","w");
+
+    struct Asci ascilar[asciSayisi];
     int sira = 1;
-    for(sira;sira<asciSayisi;sira++)
+    for(sira;sira<=asciSayisi;sira++)
     {
-        snprintf(topAsci[sira].isim, sizeof(topAsci[sira].isim), "A%d", sira);
+        snprintf(ascilar[sira].asciAdi,sizeof(ascilar[sira].asciAdi), "A%d", sira);
+        fprintf(ascilartxt, "%s\n" ,ascilar[sira].asciAdi);
     }
+
+    fclose(ascilartxt);
+    printf("\n%d adet asci basari ile kaydedildi.",asciSayisi);
+    printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
+    getch();
+    system("cls");
 }
-
-//restoran.h daki asci struct inin icerigini unuttum ve kendiminki ile guncelledim 
-//ama zaten muhtemelen bu son yazdigim kodu kullaniriz
-//senin kodla modifiye ettim edoş :D
-
-//void asciSayisiBelirleme()
-//{
-//    int asciSayisi;
-//    printf("Asci sayisini giriniz: ");
-//    scanf("%d", &asciSayisi);
-//
-//    FILE* ascilartxt = fopen("ascilar.txt","w");
-//
-//    struct Asci ascilar[asciSayisi];
-//    int sira = 1;
-//    for(sira;sira<=asciSayisi;sira++)
-//    {
-//        snprintf(ascilar[sira].asciAdi,sizeof(ascilar[sira].asciAdi), "A%d", sira);
-//        fprintf(ascilartxt, "%s\n" ,ascilar[sira].asciAdi);
-//    }
-//
-//    fclose(ascilartxt);
-//    printf("\n%d adet asci basari ile kaydedildi.",asciSayisi);
-//    printf("\n\nAna menuye donmek icin herhangi bir tusa basiniz..");
-//    getch();
-//    system("cls");
-//}
 

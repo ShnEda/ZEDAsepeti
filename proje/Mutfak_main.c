@@ -7,14 +7,16 @@
 #include <time.h>
 #include "Mutfak.h"
 
-int enKucukBulma(int* dizi, int diziBoyutu) {
+int enKucukBulma(int* dizi, int diziBoyutu)
+{
     int enKucuk = INT_MAX;
-    for(int i = 0; i < diziBoyutu; i++) {
-        if(dizi[i] < enKucuk) {
+    for(int i = 0; i < diziBoyutu; i++)
+    {
+        if(dizi[i] < enKucuk)
+        {
             enKucuk = dizi[i];
         }
     }
-
     return enKucuk;
 }
 
@@ -43,7 +45,8 @@ void otomatikYemekGuncelle(){
     //kalan sureler bir diziye atanacak
 
 }
-void atanmisYemekListele(){
+void atanmisYemekListele()
+{
     //ascilara atanmis yemekleri listelenmis halde terminalde gosterecek
     //bu kismi duzenlemek gerek
     FILE* aktifSiptxt = fopen("aktif.txt", "r");
@@ -59,7 +62,7 @@ void atanmisYemekListele(){
     time_t simdiki_zaman;
     time(&simdiki_zaman);
 
-    while (fscanf(aktifSiptxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", mutfak.sipID, mutfak.yemekAdi, &mutfak.fiyat, mutfak.sipZamani, mutfak.hazZamani, mutfak.kullaniciAdi, mutfak.) == 7 ) {
+    while (fscanf(aktifSiptxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", mutfak.sipID, mutfak.yemekAdi, &mutfak.fiyat, mutfak.sipZamani, mutfak.hazZamani, mutfak.kullaniciAdi, mutfak.asciAdi) == 7 ) {
 
         struct tm hazir_zamani;
         sscanf(mutfak.hazZamani, "%d/%d/%d %d:%d:%d", &hazir_zamani.tm_mon, &hazir_zamani.tm_mday, &hazir_zamani.tm_year, &hazir_zamani.tm_hour, &hazir_zamani.tm_min, &hazir_zamani.tm_sec);

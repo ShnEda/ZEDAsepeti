@@ -6,7 +6,7 @@
 typedef struct Mutfak {
     int fiyat,yemekID, yemekBuldu;
     char yemekAdi[30], durum[15], tarih[30],
-            saat[30], satir[100], kullaniciAdi[15],
+            saat[30], satir[100], kullaniciAdi[15],asciAdi[MAX_UZUNLUK],
             sifre[8], sipID[10],sipZamani[30],hazZamani[30];
     time_t siparisTarihi, hazirOlmaZamani;
 } mutfak;
