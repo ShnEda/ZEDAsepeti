@@ -18,13 +18,13 @@ int main() {
                             case 2: mevcutSiparis(); break;
                             case 3: oncekiSiparis(); break;
                             case 0: return musteriUygulamasi(); break;
-                            default: printf("hatali secim yaptiniz ! \n"); break;
+                            default: printf("\nhatali secim yaptiniz ! \n"); break;
                         }
                         secim2 = musteriEkrani();
                     }
                 }
                 else {
-                    printf("kullanici adi veya sifre hatali!!\n");
+                    printf("\nkullanici adi veya sifre hatali!!\n");
                     printf("\nAna menuye donmek icin bir tusa basiniz..");
                     getch();
                     system("cls");
