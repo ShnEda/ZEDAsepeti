@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
-#include "Mutfak.h"
+#include "mutfak.h"
 
 int enKucukBulma(int* dizi, int diziBoyutu)
 {
