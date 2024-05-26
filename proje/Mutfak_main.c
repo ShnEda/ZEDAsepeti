@@ -21,6 +21,38 @@ int enKucukBulma(int* dizi, int diziBoyutu)
 }
 
 void otomatikYemekGuncelle(){
+    FILE* aktifSiptxt = fopen("aktif.txt", "r");
+    if (aktifSiptxt == NULL) {
+        printf("aktif.txt mevcut degil!!\n");
+        return;
+    }
+
+    int asciSayisi = 0; // ya bu asci sayisini nasil cekicez???
+    int kalanSureler[asciSayisi];
+    for(int i = 0; i < asciSayisi; i++) {
+        kalanSureler[i] = INT_MAX;
+    }
+
+    while (fscanf(aktifSiptxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", mutfak.sipID, mutfak.yemekAdi, &mutfak.fiyat, mutfak.sipZamani, mutfak.hazZamani, mutfak.kullaniciAdi, mutfak.asciAdi) == 7 ) {
+        struct tm hazir_zamani;
+        sscanf(mutfak.hazZamani, "%d/%d/%d %d:%d:%d", &hazir_zamani.tm_mon, &hazir_zamani.tm_mday, &hazir_zamani.tm_year, &hazir_zamani.tm_hour, &hazir_zamani.tm_min, &hazir_zamani.tm_sec);
+
+        hazir_zamani.tm_mon -= 1;
+        hazir_zamani.tm_year -= 1900;
+
+        time_t hazir_zamani_t = mktime(&hazir_zamani);
+        time_t simdiki_zaman;
+        time(&simdiki_zaman);
+
+        if (hazir_zamani_t > simdiki_zaman) {
+            int kalanSure = (hazir_zamani_t - simdiki_zaman) / 60;
+            int enKucukSureliAsci = enKucukBulma(kalanSureler, asciSayisi);
+            kalanSureler[enKucukSureliAsci] = kalanSure;
+        }
+    }
+
+    fclose(aktifSiptxt);
+}
     //onaylanan yemekleri aktif.txt dosyasindan aldigi
     //gibi ascilara atayacak
     //ascilarin alacagi yemekler A1'den An'e kadar atandiktan sonra
