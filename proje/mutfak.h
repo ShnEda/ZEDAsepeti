@@ -5,8 +5,8 @@
 
 struct Mutfak {
     int fiyat,yemekID, yemekBuldu;
-    char yemekAdi[30], durum[15], kullaniciAdi[15],asciAdi[MAX_UZUNLUK],
-            sifre[8], sipID[10],sipZamani[30],hazZamani[30];
+    char yemekAdi[30], durum[15], kullaniciAdi[15], sifre[8],
+    sipID[10],sipZamani[30],hazZamani[30], asciAdi[10];
     time_t siparisTarihi, hazirOlmaZamani;
 };
 
@@ -23,40 +23,61 @@ int enKucukBulma(int* dizi, int diziBoyutu)
     return enKucuk;
 }
 
-void otomatikYemekGuncelle()
+int asciSayisi()
 {
+    FILE* ascilartxt = fopen("ascilar.txt", "r");
+    if (ascilartxt == NULL) {
+        printf("ascilar.txt mevcut degil!!\n");
+        return 0;
+    }
+
+    struct Mutfak mutfak;
+    int asci_Sayisi = 0;
+
+    while (fscanf(ascilartxt, " %[^\n]", mutfak.asciAdi) == 1) {
+        asci_Sayisi++;
+    }
+    fclose(ascilartxt);
+    return asci_Sayisi;
+}
+
+void otomatikYemekGuncelle() {
     FILE* aktifSiptxt = fopen("aktif.txt", "r");
     if (aktifSiptxt == NULL) {
         printf("aktif.txt mevcut degil!!\n");
         return;
     }
 
-    int asciSayisi = 0; // ya bu asci sayisini nasil cekicez???
-    //satir sayisi bulma kodu kullanilir
-    int kalanSureler[asciSayisi];
-    for(int i = 0; i < asciSayisi; i++) {
-        kalanSureler[i] = INT_MAX;
+    int asci_Sayisi = asciSayisi();
+    int kalanSureler[asci_Sayisi];
+    for(int i = 0; i < asci_Sayisi; i++) {
+        kalanSureler[i] = 200;
     }
+
     struct Mutfak mutfak;
-    while (fscanf(aktifSiptxt, " %[^\t] %[^\t] %d %[^\t] %[^\t]", mutfak.sipID, mutfak.yemekAdi, &mutfak.fiyat, mutfak.sipZamani, mutfak.hazZamani, mutfak.kullaniciAdi == 6 )) {
-        struct tm hazir_zamani;
+    struct tm hazir_zamani;
+    time_t hazir_zamani_t, simdiki_zaman;
+    while (fscanf(aktifSiptxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", mutfak.sipID, mutfak.yemekAdi, &mutfak.fiyat, mutfak.sipZamani, mutfak.hazZamani, mutfak.kullaniciAdi) == 6) {
+        memset(&hazir_zamani, 0, sizeof(hazir_zamani));
         sscanf(mutfak.hazZamani, "%d/%d/%d %d:%d:%d", &hazir_zamani.tm_mon, &hazir_zamani.tm_mday, &hazir_zamani.tm_year, &hazir_zamani.tm_hour, &hazir_zamani.tm_min, &hazir_zamani.tm_sec);
 
         hazir_zamani.tm_mon -= 1;
         hazir_zamani.tm_year -= 1900;
 
-        time_t hazir_zamani_t = mktime(&hazir_zamani);
-        time_t simdiki_zaman;
+        hazir_zamani_t = mktime(&hazir_zamani);
         time(&simdiki_zaman);
 
         if (hazir_zamani_t > simdiki_zaman) {
             int kalanSure = (hazir_zamani_t - simdiki_zaman) / 60;
-            int enKucukSureliAsci = enKucukBulma(kalanSureler, asciSayisi);
+            int enKucukSureliAsci = enKucukBulma(kalanSureler, asci_Sayisi);
             kalanSureler[enKucukSureliAsci] = kalanSure;
         }
     }
 
     fclose(aktifSiptxt);
+    printf("\nAna menuye gitmek icin bir tusa basiniz..");
+    getch();
+    system("cls");
 }
 
 //onaylanan yemekleri aktif.txt dosyasindan aldigi
@@ -84,14 +105,11 @@ void otomatikYemekGuncelle()
 
 void atanmisYemekListele()
 {
-    //ascilara atanmis yemekleri listelenmis halde terminalde gosterecek
-    //bu kismi duzenlemek gerek
-
     FILE *aktifSiptxt, *ascilartxt;
     aktifSiptxt = fopen("aktif.txt","r");
     ascilartxt = fopen("ascilar.txt","r");
 
-    if (aktifSiptxt == NULL && ascilartxt == NULL) {
+    if (aktifSiptxt == NULL || ascilartxt == NULL) {
         printf("aktif.txt ya da ascilar.txt mevcut degil!!\n");
         return;
     }
@@ -104,33 +122,34 @@ void atanmisYemekListele()
     time(&simdiki_zaman);
 
     struct Mutfak mutfak;
-    while (fscanf(aktifSiptxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", mutfak.sipID, mutfak.yemekAdi, &mutfak.fiyat, mutfak.sipZamani, mutfak.hazZamani, mutfak.kullaniciAdi) == 6 ) {
-        while(fscanf(ascilartxt, "%s", mutfak.asciAdi) == 1) {
+    while (fscanf(aktifSiptxt, " %[^\t] %[^\t] %d %[^\t] %[^\t] %[^\n]", mutfak.sipID, mutfak.yemekAdi, &mutfak.fiyat, mutfak.sipZamani, mutfak.hazZamani, mutfak.kullaniciAdi) == 6) {
+        if(fscanf(ascilartxt, " %[^\n]", mutfak.asciAdi) == 1){
+            struct tm hazir_zamani;
+            sscanf(mutfak.hazZamani, "%d/%d/%d %d:%d:%d", &hazir_zamani.tm_mon, &hazir_zamani.tm_mday, &hazir_zamani.tm_year, &hazir_zamani.tm_hour, &hazir_zamani.tm_min, &hazir_zamani.tm_sec);
 
-        struct tm hazir_zamani;
-        sscanf(mutfak.hazZamani, "%d/%d/%d %d:%d:%d", &hazir_zamani.tm_mon, &hazir_zamani.tm_mday, &hazir_zamani.tm_year, &hazir_zamani.tm_hour, &hazir_zamani.tm_min, &hazir_zamani.tm_sec);
+            // tm_mon 0-11 aralýðýnda olduðu için 1 eksiltiyoruz
+            hazir_zamani.tm_mon -= 1;
+            hazir_zamani.tm_year -= 1900;
 
-        // tm_mon 0-11 aralýðýnda olduðu için 1 eksiltiyoruz
-        hazir_zamani.tm_mon -= 1;
-        hazir_zamani.tm_year -= 1900;
+            time_t hazir_zamani_t = mktime(&hazir_zamani);
 
-        time_t hazir_zamani_t = mktime(&hazir_zamani);
-
-        if (hazir_zamani_t > simdiki_zaman) {
-            int kalanSure = (hazir_zamani_t - simdiki_zaman) / 60;
-            printf("%s\t%s\t\t%d TL\t\t%d dk\t\t%s\t\t%s\n",mutfak.sipID, mutfak.yemekAdi, mutfak.fiyat, kalanSure, mutfak.kullaniciAdi, mutfak.asciAdi);
-        }
-
-        //kalan sureden gidilerek ascilar arasinda paylasim yapilmis hali de eklenecek
-        //gosterirken
+            if (hazir_zamani_t > simdiki_zaman) {
+                int kalanSure = (hazir_zamani_t - simdiki_zaman) / 60;
+                if(fscanf(ascilartxt, " %[^\n]", mutfak.asciAdi) == EOF) {
+                    rewind(ascilartxt); // Dosyanın başına dön
+                }
+                printf("%s\t%s\t\t%d TL\t\t%d dk\t\t%s\t\t%s\n",mutfak.sipID, mutfak.yemekAdi, mutfak.fiyat, kalanSure, mutfak.kullaniciAdi, mutfak.asciAdi);
+            }
         }
     }
 
     fclose(aktifSiptxt);
-    printf("Musteri uygulamasina donmek icin bir tusa basiniz..");
+    fclose(ascilartxt);
+    printf("\nAna menuye gitmek icin bir tusa basiniz..");
     getch();
     system("cls");
 }
+
 
 
 /* typedef struct mutfak
