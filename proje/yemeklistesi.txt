@@ -1,3 +1,0 @@
-34	Lahmacun	55.00	20		Mevcut
-64	Pide	100.00	40		Mevcut Degil
-30	Urfa Kebap	170.00	30		Mevcut
