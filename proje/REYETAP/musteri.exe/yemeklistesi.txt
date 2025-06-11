@@ -1,0 +1,10 @@
+75	Kiymali Pide	150	30		Mevcut
+48	Peynirli Pide	130	30		Mevcut Degil
+26	Adana Kebap	200	35		Mevcut
+91	Urfa Kebap	190	35		Mevcut Degil
+50	Tavuk Burger	110	25		Mevcut
+87	Kadife Tatlisi	60	20		Mevcut
+66	Kadayif Tatli	70	15		Mevcut Degil
+18	Izgara Tavuk	160		40	Mevcut
+67	Izgara Et	200		45	Mevcut
+28	Orman Kebabi	85		25	Mevcut

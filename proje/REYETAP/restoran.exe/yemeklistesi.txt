@@ -1,0 +1,11 @@
+197	Kiymali Pide	150	30	Mevcut
+418	Yayik Ayrani	15	2	Mevcut
+279	Adana Kebap	200	40	Mevcut
+315	Urfa Kebap	190	40	Mevcut Degil
+310	Orman Kebabi	70	20	Mevcut
+537	Peynirli Pide	120	35	Mevcut Degil
+499	Kavurmali Pide	200	30	Mevcut
+147	Kusbasili Pide	200	35	Mevcut Degil
+289	Beyti Kebap	200	25	Mevcut
+514	Ezogelin Corba	65	15	Mecvut
+248	Ramazan Pidesi	30	15	Mevcut

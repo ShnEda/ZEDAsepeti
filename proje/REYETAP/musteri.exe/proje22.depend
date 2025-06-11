@@ -1,0 +1,55 @@
+# depslib dependency file v1.0
+1715886683 source:c:\users\zeyne\desktop\proje22\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1715892475 source:c:\users\zeyne\desktop\proje22\musteri.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<stdbool.h>
+	<time.h>
+	"musteri.h"
+
+1715891691 c:\users\zeyne\desktop\proje22\musteri.h
+	<stdbool.h>
+
+1716737165 source:c:\users\zeyne\desktop\yeni proje\musteri.exe\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<time.h>
+	"musteri.h"
+
+1716720964 source:c:\users\zeyne\desktop\yeni proje\musteri.exe\musteri.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<time.h>
+	"musteri.h"
+
+1716795791 c:\users\zeyne\desktop\yeni proje\musteri.exe\musteri.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<time.h>
+
+1716737165 source:c:\users\zeyne\desktop\birin ikisi\yeni proje\musteri.exe\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<time.h>
+	"musteri.h"
+
+1716795791 c:\users\zeyne\desktop\birin ikisi\yeni proje\musteri.exe\musteri.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<time.h>
+

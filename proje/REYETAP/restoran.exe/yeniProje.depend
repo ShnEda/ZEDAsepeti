@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1715870843 source:c:\users\zeyne\desktop\yeniproje\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1715882658 source:c:\users\zeyne\desktop\yeniproje\restoran.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<stdbool.h>
+	<time.h>
+	"restoran.h"
+
+1715882366 c:\users\zeyne\desktop\yeniproje\restoran.h
+	<stdbool.h>
+
+1716812154 source:c:\users\zeyne\desktop\yeni proje\restoran.exe\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<time.h>
+	"restoran.h"
+
+1716735487 source:c:\users\zeyne\desktop\yeni proje\restoran.exe\restoran.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<time.h>
+	"restoran.h"
+
+1716814623 c:\users\zeyne\desktop\yeni proje\restoran.exe\restoran.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<time.h>
+

@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1716800803 source:c:\users\zeyne\desktop\yeni proje\mutfak.exe\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<limits.h>
+	<string.h>
+	<stdbool.h>
+	<time.h>
+	"mutfak.h"
+
+1716873811 c:\users\zeyne\desktop\yeni proje\mutfak.exe\mutfak.h
+
