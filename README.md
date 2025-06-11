@@ -29,11 +29,7 @@ proje/REYETAP/
 Each folder contains the source code and data files for its respective module.
 
 ## How to Build
-Each module can be built separately using the provided Code::Blocks project files (`*.cbp`). Open the desired `.cbp` file in Code::Blocks and build the project.
-
-- `proje22.cbp` for musteri.exe
-- `yeniProje.cbp` for restoran.exe
-- `projeemut.cbp` for mutfak.exe
+Each module can be built separately using the provided Code::Blocks project files with their `.c`.
 
 ## How to Run
 1. *restoran.exe*: Run to manage the menu, approve/reject orders, and view reports.
